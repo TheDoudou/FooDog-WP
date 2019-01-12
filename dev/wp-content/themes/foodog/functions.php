@@ -339,3 +339,91 @@ class FDInstaGetPicWidget extends WP_Widget {
         return $instance;
     }
 } // Class FDInstaGetPicWidget ends
+
+/**
+ * Creating the facebook link widget
+ * 
+ * @class FDFacebookLinkWidget()
+ */ 
+class FDFacebookLinkWidget extends WP_Widget {
+ 
+    function __construct() {
+        parent::__construct(
+        
+            // Base ID of your widget
+            'FDFacebookLinkWidget', 
+            
+            // Widget name will appear in UI
+            __('Facebook Link', 'FDFacebookLinkWidget_domain'), 
+            
+            array( 'description' => __( 'Link facebook page', 'FDFacebookLinkWidget_domain' ), ) 
+        );
+    }
+    
+    // Front-end
+    public function widget( $args, $instance ) {
+        $account = apply_filters( 'widget_account', $instance['account'] );
+        
+        echo $args['before_widget'];
+        if ( ! empty( $account ) ) {
+
+            $url_insta = file_get_contents('https://www.instagram.com/'.$account);
+
+            $arr_insta = explode('window._sharedData = ',$url_insta);
+            $arr_insta = explode(';</script>',$arr_insta[1]);
+            $arr_insta = json_decode($arr_insta[0] , true);
+
+            //print("<pre>".print_r($arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][0],true)."</pre>");
+
+            echo '<a href="https://www.instagram.com/'.$account.'/" target="_blank"><h3 class="h3-title"> INSTAGRAM </h3></a>';
+            echo '<div class="row">';
+
+            for ($i = 0; $i < $number; $i++) {
+                $src = $arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][$i]['node']['thumbnail_resources'][1]['src'];
+                $href = $arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][$i]['node']['display_url'];
+
+                echo '<div class="col-xs-4">
+                    <a href="'.$href.'" target="_blank"><img class="img-instagram" src="'.$src.'"></a>
+                </div>"';
+            }
+            echo '</div>';
+            echo $args['before_title'] . $url . $args['after_title'];
+        }
+        // This is where you run the code and display the output
+        echo $args['after_widget'];
+    }
+            
+    // Back-end 
+    public function form( $instance ) {
+
+        if ( isset( $instance[ 'account' ] ) ) {
+            $account = $instance[ 'account' ];
+            $type = $instance[ 'type' ];
+        }
+        else {
+            $account = __( '', 'FDInstaGetPicWidget_domain' );
+            $type = __( '0', 'FDInstaGetPicWidget_domain' );
+        }
+
+        // Widget admin form
+        ?>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'account' ); ?>"><?php _e( 'Page name :' ); ?></label> 
+            <input class="widefat" id="<?php echo $this->get_field_id( 'account' ); ?>" name="<?php echo $this->get_field_name( 'account' ); ?>" type="text" value="<?php echo esc_attr( $account ); ?>" />
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'type' ); ?>"><?php _e( 'Type :' ); ?></label> 
+            <input class="widefat" id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>" type="radio" value="simple" <?= (esc_attr( $type ))? "selected" : NULL; ?> />
+            <input class="widefat" id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>" type="radio" value="extend" <?= (esc_attr( $type ))? "selected" : NULL; ?> />
+        </p>
+        <?php 
+    }
+        
+    // Updating widget replacing old instances with new
+    public function update( $new_instance, $old_instance ) {
+        $instance = array();
+        $instance['account'] = ( ! empty( $new_instance['account'] ) ) ? strip_tags( $new_instance['account'] ) : '';
+        $instance['type'] = ( ! empty( $new_instance['type'] ) ) ? strip_tags( $new_instance['type'] ) : '';
+        return $instance;
+    }
+} // Class FDFacebookLinkWidget ends

@@ -109,32 +109,83 @@ li{
 }
 
 .banniere-nav, .navbar-inverse{
-    padding:10px 0;
     border-bottom: 1px solid #555;
     background-color: white;
     height: 65px;
     
 }
+.nav_single_global{
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 15px;
+}
+.form-newletter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
 .icon-bar {
     margin-bottom:3px;
     display: block;
+    margin-left: 10px;
+    padding-left: 20px;
     width: 22px;
     height: 3px;
-    
     background-color: #555;
     border-radius: 1px;
+  }
+.btn-sign{
+    background-color: #000;
+    border-radius: 0;
+    margin-left: -5px;
+    color: white;
+    font-size: 0.8rem;
+    height: 38px;
+    width: 80px;
+    border: 1px solid #000;
+  }
+.btn-sign:hover{
+    background-color: white;
+    color: #FF8D6A;
+    border: 1px solid #FF8D6A;
   }
 
 .p-4{
     background-color: white;
     border-bottom: 1px solid #555;
 }
-.logoFarmer{
-    width: 75px;
-    height: 75px;
-    padding-bottom: 10px;
+.text-form{
+    margin: 0;
+    font-family: "Open sans", serif;
+    font-size: 0.9rem;
+    padding-right: 5px;
 }
-
+.input-newletter{
+    width: 250px !important ;
+    border: 1px solid black;
+ 
+}
+.btn-nav{
+    margin-left: 20px;
+}
+.logo_nav{
+    display: flex;
+    justify-content: flex-end;
+  
+}
+.logoFarmer{
+    width: 62px;
+    height: 62px;
+    margin-bottom: 5px;
+    
+    
+}
+.search_single{
+    position: relative;
+    top: 17px;
+    margin-left: 15px;
+}
 /* ACCUEIL HEADER ARTICLE */
 .global_article_header{
     padding: 20px 0;
@@ -461,12 +512,42 @@ display: flex;
     position: sticky;
     top: 80px;
 }
+/* SIDEBAR 2*/
+.titre_single_sidebar{
+    text-align: center;
+    font-family: "Open sans", serif;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+}
+.sidebar_nav2{
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    padding-bottom: 26px;
+}
+.icon1,.icon2,.icon3{
+    background-color: #45484a;
+    border-radius: 500px;
+    padding:5px 11px;
+    margin: 10px 5px;
+    color: white;
+    border: 1px solid #45484a;
 
-
-
+}
+.icon2{   
+    padding:5px 9px;
+}
+.icon3{
+    padding:5px 9px;
+}
+.icon1:hover, .icon2:hover, .icon3:hover{
+    background-color:#fff;
+    color:#45484a;
+    border: 1px solid #45484a;
+}
 /* CONTENT SINGLE PAGE */
 .content_single{
-    margin-top: 140px;
+    margin-top: 100px;
     
 }
 .site-main--single{
