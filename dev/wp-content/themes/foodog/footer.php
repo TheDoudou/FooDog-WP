@@ -7,11 +7,10 @@
  * @package FooDog
  */
 ?>
-
 <footer>	    
     <div class="container">
         <div class="row">
-            <div class=" sidebar-footer col-sm-4 col-xs-12">
+            <div class=" sidebar-footer col-md-4 col-xs-12">
                 <aside class="footer-categories">
                     <h3 class="h3-title"> CATEGORIES </h3>
                     <ul class="footer-ul">
@@ -37,7 +36,7 @@
                     </ul>
                 </aside>
             </div>
-            <div class=" sidebar-footer col-sm-4 col-xs-12">
+            <div class=" sidebar-footer col-md-4 col-xs-12">
                 <aside class="footer-categories">
                     <h3 class="h3-title">POPULAR POSTS </h3>
                     <ul class="footer-ul-posts">
@@ -53,7 +52,7 @@
                     </ul>
                 </aside>
             </div>
-            <div class=" sidebar-footer col-sm-4 col-xs-12">
+            <div class=" sidebar-footer col-md-4 col-xs-12">
                 <aside class="footer-categories">
                     <!-- <h3 class="h3-title"> INSTAGRAM </h3>
                     <div class="row">

@@ -248,11 +248,13 @@ function theme_foodog_last_insta_post_init() {
 function wpb_load_widget() {
     register_widget( 'FDInstaGetPicWidget' );
 }
+
 add_action( 'widgets_init', 'wpb_load_widget' );
  
 /**
  * Creating the Instagram get picture widget
  * 
+ * @class FDInstaGetPicWidget()
  */ 
 class FDInstaGetPicWidget extends WP_Widget {
  
@@ -336,4 +338,4 @@ class FDInstaGetPicWidget extends WP_Widget {
         $instance['number'] = ( ! empty( $new_instance['number'] ) ) ? strip_tags( $new_instance['number'] ) : '';
         return $instance;
     }
-} // Class wpb_widget ends
+} // Class FDInstaGetPicWidget ends

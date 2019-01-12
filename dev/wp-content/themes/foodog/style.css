@@ -1,9 +1,32 @@
+/**
+ * Index :
+ *  - Font
+ *  - Global
+ *  - Admin
+ * Header :
+ *  - Header
+ *  - Header Single page
+ * Head Home Page :
+ *  - Accueil header article
+ *      - Right article
+ *  - Accueil article
+ *  - Accueil article latest
+ *  - Category page
+ *      - Share
+ *  - Pagination
+ *  - Single page
+ *  - Sidebar
+ *  - Single page
+ *  - Footer
+ *
+ */
+
 /*FONTS
 font-family: 'Crimson Text', serif;
 font-family: 'Open Sans', sans-serif;
 */
 
-
+/* Global */
 body{
     margin: 0;
     font-family: 'Crimson Text', serif;
@@ -76,6 +99,42 @@ li{
 #site-navigation > a:hover{
     border-bottom: 3px solid #FF8D6A;
 }
+
+/* HEADER Single page*/
+
+.header_admin_margin{
+    padding-left:10px;
+    padding-right:10px;
+    margin: 0;
+}
+
+.banniere-nav, .navbar-inverse{
+    padding:10px 0;
+    border-bottom: 1px solid #555;
+    background-color: white;
+    height: 65px;
+    
+}
+.icon-bar {
+    margin-bottom:3px;
+    display: block;
+    width: 22px;
+    height: 3px;
+    
+    background-color: #555;
+    border-radius: 1px;
+  }
+
+.p-4{
+    background-color: white;
+    border-bottom: 1px solid #555;
+}
+.logoFarmer{
+    width: 75px;
+    height: 75px;
+    padding-bottom: 10px;
+}
+
 /* ACCUEIL HEADER ARTICLE */
 .global_article_header{
     padding: 20px 0;
@@ -403,63 +462,9 @@ display: flex;
     top: 80px;
 }
 
-/*Header single page*/
 
-.header_admin_margin{
-    padding-left:10px;
-    padding-right:10px;
-    margin: 0;
-}
 
-.banniere-nav{
-    padding:10px 0;
-    border-bottom: 1px solid #ccc;
-    background-color: white;
-    height: 65px;
-    
-}
-
-.hamburger-menu{
-    position: absolute;
-    z-index: 1;
-    height: 42px;
-    width: 42px;
-    left: 0;
-    top: 0;
-}
-.input_global{
-    display: flex;
-    padding: 10px 0;
-    justify-content: center;
-    height: 50px;
-}
-.input-email{
-    border: 1px solid black;
-    padding-left:5px;
-    width: 250px;
-    
-}
-.text_single_header{
-    padding-top: 2px;
-    padding-right: 5px;
-    font-family: "Open sans", serif;
-}
-.button-email{
-    border: 1px solid black;
-    color:white;
-    background-color:black;
-}
-.logo_right{
-    display: flex;
-    justify-content: flex-end;
-}
-.logoFarmer{
-    width: 75px;
-    height: 75px;
-    padding-bottom: 10px;
-}
-
-/*CONTENT SINGLE PAGE*/
+/* CONTENT SINGLE PAGE */
 .content_single{
     margin-top: 140px;
     
@@ -621,6 +626,7 @@ footer{
     background-position: center center;
     display: block;
     padding-top: 60px;
+    width:100%;
 
 }
 
@@ -760,11 +766,6 @@ footer{
     color:black;
     transition: color .2s ease-in-out;
 }
-
-
-
-
-
 
 
 
