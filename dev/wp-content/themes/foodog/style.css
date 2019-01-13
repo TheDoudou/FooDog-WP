@@ -102,7 +102,28 @@ li{
 #site-navigation > a:hover{
     border-bottom: 3px solid #FF8D6A;
 }
-
+#searchModal {
+    padding-right: 0px!important;
+    
+}
+.modal-full {
+    min-width: 100%;
+    margin: 0;
+    padding: 0px;
+}
+.modal-content {
+    height: 93vh;
+    background: rgba(255,255,255,0.5)
+}
+.modal-search {
+    margin: 50vh;
+    opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+/* Search page */
+.search-search {
+    margin-top: 20px
+}
 /* HEADER Single page*/
 
 .header_admin_margin{

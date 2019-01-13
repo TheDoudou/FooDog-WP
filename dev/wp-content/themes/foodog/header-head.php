@@ -27,22 +27,15 @@
 	<title>FooDogDev</title>
 	<?php wp_head(); ?>
 </head>
-
-<div class="modal fade modal-full" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Search</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-full" role="document">
+    <div class="modal-content d-flex justify-content-center align-items-center">
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="">
+			<form role="search" role="search" method="get" id="searchform" class="searchform" action="">
+				<input class="modal-search" id="searchsubmit" type="text" name="s" placeholder="Search ...">
+			</form>
+		</div>
       </div>
     </div>
   </div>
