@@ -39,7 +39,7 @@
             <div class=" sidebar-footer col-md-4 col-xs-12">
                 <aside class="footer-categories">
                     <h3 class="h3-title">POPULAR POSTS </h3>
-                    <ul class="footer-ul-posts">
+                    <ul class="footer-ul-posts" aria-hidden="true">
                         <?php
                             $popularpost = new WP_Query( array( 'posts_per_page' => 3, 'meta_key' => '_foodog_post_views_count', 'orderby' => 'meta_value_num', 'order' => 'DESC'  ) );
                             while ( $popularpost->have_posts() ) : $popularpost->the_post();
@@ -54,36 +54,6 @@
             </div>
             <div class=" sidebar-footer col-md-4 col-xs-12">
                 <aside class="footer-categories">
-                    <!-- <h3 class="h3-title"> INSTAGRAM </h3>
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img class="img-instagram" src="https://devfoodog.thedoudou.myds.me/wp-content/uploads/2019/01/freyaeverafter_-skinny.jpg">
-                        </div>
-                        <div class="col-xs-4">
-                            <img class="img-instagram" src="https://devfoodog.thedoudou.myds.me/wp-content/uploads/2019/01/freyaeverafter_-skinny.jpg">
-                        </div>
-                        <div class="col-xs-4">
-                            <img class="img-instagram" src="https://devfoodog.thedoudou.myds.me/wp-content/uploads/2019/01/freyaeverafter_-skinny.jpg">
-                        </div>
-                        <div class="col-xs-4">
-                            <img class="img-instagram" src="https://devfoodog.thedoudou.myds.me/wp-content/uploads/2019/01/freyaeverafter_-skinny.jpg">
-                        </div>
-                        <div class="col-xs-4">
-                            <img class="img-instagram" src="https://devfoodog.thedoudou.myds.me/wp-content/uploads/2019/01/freyaeverafter_-skinny.jpg">
-                        </div>
-                        <div class="col-xs-4">
-                            <img class="img-instagram" src="https://devfoodog.thedoudou.myds.me/wp-content/uploads/2019/01/freyaeverafter_-skinny.jpg">
-                        </div>
-                        <div class="col-xs-4">
-                            <img class="img-instagram" src="https://devfoodog.thedoudou.myds.me/wp-content/uploads/2019/01/freyaeverafter_-skinny.jpg">
-                        </div>
-                        <div class="col-xs-4">
-                            <img class="img-instagram" src="https://devfoodog.thedoudou.myds.me/wp-content/uploads/2019/01/freyaeverafter_-skinny.jpg">
-                        </div>
-                        <div class="col-xs-4">
-                            <img class="img-instagram" src="https://devfoodog.thedoudou.myds.me/wp-content/uploads/2019/01/freyaeverafter_-skinny.jpg">
-                        </div>
-                    </div> -->
                     <?php dynamic_sidebar( 'sidebar-3' ); ?>
                 </aside>
             </div>

@@ -12,6 +12,7 @@ add_theme_support('post-thumbnails');
 add_image_size('headerbig', 1000, 1000);
 add_image_size('header', 180, 160);
 add_image_size('latest', 270, 600);
+add_image_size('like', 200, 200);
 
 add_image_size( 'foodog-masonry-image', 450, 9999, false );
 
@@ -210,8 +211,8 @@ function theme_foodog_sidebar_widgets_init() {
         'name' => __( 'Main Sidebar', 'theme-foodog' ),
         'id' => 'sidebar-1',
         'description' => __( 'Widgets in this area will be shown on all posts and pages.', 'theme-foodog' ),
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-	'after_widget'  => '</li>',
+        'before_widget' => '<ul><li id="%1$s" class="widget %2$s">',
+	'after_widget'  => '</li></ul>',
 	'before_title'  => '<h2 class="widgettitle">',
 	'after_title'   => '</h2>',
     ) );
@@ -222,8 +223,8 @@ function theme_foodog_sidebar_single_widgets_init() {
         'name' => __( 'Single Sidebar', 'theme-foodog' ),
         'id' => 'sidebar-2',
         'description' => __( 'Widgets in this area will be shown on single page.', 'theme-foodog' ),
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-	'after_widget'  => '</li>',
+        'before_widget' => '<ul><li id="%1$s" class="widget %2$s">',
+	'after_widget'  => '</li></ul>',
 	'before_title'  => '<h2 class="widgettitle">',
 	'after_title'   => '</h2>',
     ) );
@@ -234,10 +235,10 @@ function theme_foodog_last_insta_post_init() {
         'name' => __( 'Footer', 'theme-foodog' ),
         'id' => 'sidebar-3',
         'description' => __( 'Widgets in this area will be shown on footer.', 'theme-foodog' ),
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-	'after_widget'  => '</li>',
-	'before_title'  => '<h2 class="widgettitle">',
-	'after_title'   => '</h2>',
+        'before_widget' => '',
+	'after_widget'  => '',
+	'before_title'  => '',
+	'after_title'   => '',
     ) );
 }
 
@@ -247,7 +248,7 @@ function theme_foodog_last_insta_post_init() {
  */
 function wpb_load_widget() {
     register_widget( 'FDInstaGetPicWidget' );
-    register_widget( 'FDFacebookLinkWidget' );
+    register_widget( 'FDSocialNetworkWidget' );
 }
 
 add_action( 'widgets_init', 'wpb_load_widget' );
@@ -297,11 +298,11 @@ class FDInstaGetPicWidget extends WP_Widget {
                 $href = $arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][$i]['node']['display_url'];
 
                 echo '<div class="col-xs-4">
-                    <a href="'.$href.'" target="_blank"><img class="img-instagram" src="'.$src.'"></a>
+                    <a href="'.$href.'" target="_blank"><img class="img-instagram" src="'.$src.'" alt="Instagram picture"></a>
                 </div>"';
             }
             echo '</div>';
-            echo $args['before_title'] . $url . $args['after_title'];
+            //echo $args['before_title'] . $url . $args['after_title'];
         }
         // This is where you run the code and display the output
         echo $args['after_widget'];
@@ -346,18 +347,18 @@ class FDInstaGetPicWidget extends WP_Widget {
  * 
  * @class FDFacebookLinkWidget()
  */ 
-class FDFacebookLinkWidget extends WP_Widget {
+class FDSocialNetworkWidget extends WP_Widget {
  
     function __construct() {
         parent::__construct(
         
             // Base ID of your widget
-            'FDFacebookLinkWidget', 
+            'FDSocialNetworkWidget', 
             
             // Widget name will appear in UI
-            __('Facebook Link', 'FDFacebookLinkWidget_domain'), 
+            __('Facebook Link', 'FDSocialNetworkWidget_domain'), 
             
-            array( 'description' => __( 'Link facebook page', 'FDFacebookLinkWidget_domain' ), ) 
+            array( 'description' => __( 'Link facebook page', 'FDSocialNetworkWidget_domain' ), ) 
         );
     }
     
@@ -365,6 +366,7 @@ class FDFacebookLinkWidget extends WP_Widget {
     public function widget( $args, $instance ) {
         $account = apply_filters( 'widget_account', $instance['account'] );
         $type = apply_filters( 'widget_type', $instance['type'] );
+        $class = apply_filters( 'widget_type', $instance['class'] );
 
         echo $args['before_widget'];
         if ( ! empty( $account ) ) {
@@ -401,14 +403,20 @@ class FDFacebookLinkWidget extends WP_Widget {
         if ( isset( $instance[ 'account' ] ) ) {
             $account = $instance[ 'account' ];
             $type = $instance[ 'type' ];
+            $class = $instance[ 'class' ];
         }
         else {
-            $account = __( '', 'FDInstaGetPicWidget_domain' );
-            $type = __( 'simple', 'FDInstaGetPicWidget_domain' );
+            $account = __( '', 'FDSocialNetworkWidget_domain' );
+            $type = __( 'simple', 'FDSocialNetworkWidget_domain' );
+            $class = __( '', 'FDSocialNetworkWidget_domain' );
         }
 
         // Widget admin form
         ?>
+        <p>
+            <label for="<?= $this->get_field_id( 'class' ); ?>"><?php _e( 'Social Network :' ); ?></label> 
+            <input class="" id="<?= $this->get_field_id( 'class' ); ?>" name="<?= $this->get_field_name( 'class' ); ?>" type="text" value="<?= esc_attr( $account ); ?>" />
+        </p>
         <p>
             <label for="<?= $this->get_field_id( 'account' ); ?>"><?php _e( 'Page name :' ); ?></label> 
             <input class="" id="<?= $this->get_field_id( 'account' ); ?>" name="<?= $this->get_field_name( 'account' ); ?>" type="text" value="<?= esc_attr( $account ); ?>" />
@@ -445,3 +453,5 @@ class FDFacebookLinkWidget extends WP_Widget {
  *  <li class="sidebar_link sidebar_link_twitter"><a href="https://twitter.com/" class="sidebar_link" target="_blank"><i class="fa fa-twitter sidebar_twitter"></i><p class="sidebar_follow">FOLLOW</p></a></li>
  *  <li class="sidebar_link sidebar_link_insta"><a href="https://www.instagram.com/" class="sidebar_link" target="_blank"><i class="fa fa-instagram sidebar_insta"></i><p class="sidebar_follow">FOLLOW</p></a></li>
  */
+
+

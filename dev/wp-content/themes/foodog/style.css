@@ -27,6 +27,12 @@ font-family: 'Open Sans', sans-serif;
 */
 
 /* Global */
+@font-face {
+    font-family: 'Crimson Text';
+    font-display: auto;
+    src: local('Arvo'), url(https://fonts.gstatic.com/s/arvo/v9/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+}
+
 body{
     margin: 0;
     font-family: 'Crimson Text', serif;
@@ -86,20 +92,23 @@ li{
     right:40px;
 }
 .cat_nav{
+    /* for bs nav
     display: flex;
     justify-content: center;
+    */
+    padding: 14px; /* for BS nav */
     font-size: 1.1rem;
     font-family: 'Open Sans', sans-serif;
     text-transform: uppercase;
     border-bottom: 1px solid #F2F2F2;
 }
-#site-navigation > a{
+.site-navigation > a{
     margin-left: 50px;
     padding: 12px 0;
     border-bottom: 3px solid white;
     
 }
-#site-navigation > a:hover{
+.site-navigation > a:hover{
     border-bottom: 3px solid #FF8D6A;
 }
 #searchModal {
@@ -120,6 +129,7 @@ li{
     opacity: 1;
     filter: alpha(opacity=100); /* For IE8 and earlier */
 }
+
 /* Search page */
 .search-search {
     margin-top: 20px
@@ -142,6 +152,15 @@ li{
     display: flex;
     justify-content: flex-start;
     padding-top: 15px;
+}
+#navbarToggleExternalContent > div > a{
+ padding: 5px px;
+ font-family: "Open sans", serif;
+ font-size: 1.4rem;
+ border-bottom: 2px solid #fff;
+}
+#navbarToggleExternalContent > div > a:hover{
+    border-bottom: 2px solid #FF8D6A;
 }
 .form-newletter{
     display: flex;
@@ -178,6 +197,9 @@ li{
 .p-4{
     background-color: white;
     border-bottom: 1px solid #555;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
 }
 .text-form{
     margin: 0;
@@ -620,6 +642,15 @@ display: flex;
 .left_under_img{
     display: flex;
     justify-content: space-around;  
+}
+.text_under_img{
+    font-family: "Open sans", serif;
+    font-size: 0.8rem;
+    position: relative;
+    top: 15px;
+    right: 30px;
+    text-transform: uppercase;
+    
 }
 .right_under_img{
     display: flex;

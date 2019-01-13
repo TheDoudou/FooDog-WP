@@ -29,7 +29,7 @@ get_header('single'); ?>
 							<div class="under_img_single container">
 								<div class="left_under_img col-md-4">
 									<img src="wp-content/themes/foodog/assets/img/dog.png" class=" logoFarmer_small" alt="logo">
-									<p>The Farmer's dog</p>
+									<p class="text_under_img">The Farmer's dog</p>
 								</div>
 								<div class="right_under_img col-md-6">
 									<div>
@@ -90,7 +90,34 @@ get_header('single'); ?>
 							</div>
 							<!-- Article du meme theme -->
 
-
+							<div class="row">
+								<div class="">
+									
+									<?php
+									$cats = get_the_category();
+									$args = array(
+										'post_type'		=> 'post',
+										'post__not_in'	=> array( get_the_ID() ),
+										'posts_per_page'=> 3,
+										'cat'     		=> $cats[0]->term_id
+									);
+									
+									$query = new WP_Query( $args );
+									
+									if ( $query->have_posts() ) { ?>
+										<div class="row container global_article">
+										<?php while ( $query->have_posts() ) {
+												$query->the_post();?>
+											<div class="col-12 col-lg-4">
+												<div class="img_artcile"><?php the_post_thumbnail('like'); ?></div><br>
+												<div class="">
+													<a href="<?php the_permalink(); ?>" class="link-title"><h3 class="title_article"><?php the_title(); ?></h3></a>
+												</div>
+											</div>
+										<?php } ?>
+										</div><br>
+									<?php }
+									wp_reset_postdata(); ?>
 							
 							<?php
 							// If comments are open or we have at least one comment, load up the comment template

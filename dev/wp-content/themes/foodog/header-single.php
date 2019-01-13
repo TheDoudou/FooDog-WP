@@ -28,7 +28,6 @@
         <div class="pos-f-t">
             <div class="collapse" id="navbarToggleExternalContent">
                 <div class="bg-inverse p-4">
-                    <h4 class="text">Collapsed content</h4>
                     <?php
                         foreach( $categories as $category ) {
                             $param = get_option("taxonomy_".$category->term_id);

@@ -5,6 +5,8 @@
  *
  * @package FooDog
  */
+
+header('Cache-Control: max-age=31536000');
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +18,7 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<meta name="Description" content="Food for dog.">
+	<meta name="theme-color" content="#3367D6"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link href="<?php echo get_bloginfo('template_directory'); ?>/style.css" rel="stylesheet">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -24,9 +27,17 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,700|Open+Sans:400,800" rel="stylesheet">	
 	<link rel="icon" href="wp-content/themes/foodog/assets/img/favicon.png" type="images/x-icon">
+	<link rel="manifest" href="wp-content/themes/foodog/manifest.json">
+	<script src="wp-content/themes/foodog/assets/js/upup.min.js"></script>
+	<script>
+		UpUp.start({
+			'content-url': 'offline.html'
+    	});
+	</script>
 	<title>FooDogDev</title>
 	<?php wp_head(); ?>
 </head>
+
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-full" role="document">
     <div class="modal-content d-flex justify-content-center align-items-center">
