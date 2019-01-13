@@ -41,7 +41,7 @@ get_header('single'); ?>
 									</div>
 								</div>
 							</div>
-							<!--barre social-->
+							<!-- barre social start -->
 							<div class="text_single"><?php echo $post->post_content; ?></div>
 							<div class="container global_share_single">
 								<a href="#" class="share_single">SHARE</a>
@@ -58,6 +58,40 @@ get_header('single'); ?>
 									<button type="submit" class="btn btn-newletter">SIGN UP</button>
 								</div>
 							</div>	
+							<!-- barre social end -->
+							<!-- Pagination XL start -->
+							<div class="pagination_single row container">
+								<div class="col-md-6 previous">
+									<p class="nav_pagi"><a href="?p=<?= get_previous_post()->ID?>">< PREVIOUS ARTICLE</a></p>
+									<p class="title_pagi uppercase"><?php previous_post_link('<strong>%link</strong>'); ?></p>
+								</div>
+								<div class="col-md-6">
+									<p class="nav_pagi"><a href="?p=<?= get_next_post()->ID?>">NEXT ARTICLE ></a></p>
+									<p class="title_pagi uppercase"><?php next_post_link('<strong>%link</strong>'); ?></p>
+								</div>
+							</div>
+							<!-- Pagination XL end -->
+							<div class="row container paragra_single">
+								<div class="col-md-2 contain_logo">
+									<img src="wp-content/themes/foodog/assets/img/dog.png" class=" logoFarmer_single" alt="logo">
+								</div>
+								<div class="col-md-10">
+									<h6 class="title_paragra">The Farmer's Dog</h6>
+									<p class="text_paragra">The Farmer’s Dog is the leading direct-to-consumer, fresh pet food company, offering customers and their pets the highest 
+									quality and convenience without retail markups. All human-grade meal plans are made to order, designed by veterinarians,
+									and personalized to provide the ideal nutritional balance for every dog. Get started today at https://www.thefarmersdog.com/.</p>
+								</div>
+							</div>
+
+
+
+							<div class=" title_section_single container">
+								<h2 class="section_article_single uppercase">YOU MIGHT ALSO LIKE</h2> 
+							</div>
+							<!-- Article du meme theme -->
+
+
+							
 							<?php
 							// If comments are open or we have at least one comment, load up the comment template
 							if ( comments_open() || get_comments_number() ) :

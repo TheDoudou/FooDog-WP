@@ -247,6 +247,7 @@ function theme_foodog_last_insta_post_init() {
  */
 function wpb_load_widget() {
     register_widget( 'FDInstaGetPicWidget' );
+    register_widget( 'FDFacebookLinkWidget' );
 }
 
 add_action( 'widgets_init', 'wpb_load_widget' );
@@ -363,31 +364,33 @@ class FDFacebookLinkWidget extends WP_Widget {
     // Front-end
     public function widget( $args, $instance ) {
         $account = apply_filters( 'widget_account', $instance['account'] );
-        
+        $type = apply_filters( 'widget_type', $instance['type'] );
+
         echo $args['before_widget'];
         if ( ! empty( $account ) ) {
 
-            $url_insta = file_get_contents('https://www.instagram.com/'.$account);
+            $url_fb = file_get_contents(''.$account);
+            $sidebar = "sidebar_nav";
 
-            $arr_insta = explode('window._sharedData = ',$url_insta);
-            $arr_insta = explode(';</script>',$arr_insta[1]);
-            $arr_insta = json_decode($arr_insta[0] , true);
+            if ( $type == "extend") {
+                $sidebar = "sidebar_nav2";
+                $arr_fb = explode('window._sharedData = ',$url_insta);
+                $arr_fb = explode(';</script>',$arr_insta[1]);
+                $arr_fb = json_decode($arr_insta[0] , true);
 
-            //print("<pre>".print_r($arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][0],true)."</pre>");
-
-            echo '<a href="https://www.instagram.com/'.$account.'/" target="_blank"><h3 class="h3-title"> INSTAGRAM </h3></a>';
-            echo '<div class="row">';
-
-            for ($i = 0; $i < $number; $i++) {
-                $src = $arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][$i]['node']['thumbnail_resources'][1]['src'];
-                $href = $arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][$i]['node']['display_url'];
-
-                echo '<div class="col-xs-4">
-                    <a href="'.$href.'" target="_blank"><img class="img-instagram" src="'.$src.'"></a>
-                </div>"';
+                $view = '<li class="sidebar_link sidebar_link_facebook"><a href="https://facebook.com/" class="sidebar_link" target="_blank"><i class="fa fa-facebook sidebar_facebook"></i><p class="sidebar_follow">LIKE</p></a></li>';
+            } else {
+                $view = '<li><a href="https://facebook.com/" class="icon1" target="_blank"><i class="fa fa-facebook"></i></a></li>';
             }
-            echo '</div>';
-            echo $args['before_title'] . $url . $args['after_title'];
+
+            echo '<div class ="sidebar_global">';
+            if ( $sidebar == 'sidebar_nav')
+                echo '<h2 class="titre_single_sidebar">FOLLOW US</h2>';
+                    
+            echo '<ul id="sidebar" class="'.$sidebar.'">';
+            echo $args['before_view'] . $view . $args['after_view'];
+            echo '</ul>
+                </div>';
         }
         // This is where you run the code and display the output
         echo $args['after_widget'];
@@ -395,35 +398,50 @@ class FDFacebookLinkWidget extends WP_Widget {
             
     // Back-end 
     public function form( $instance ) {
-
         if ( isset( $instance[ 'account' ] ) ) {
             $account = $instance[ 'account' ];
             $type = $instance[ 'type' ];
         }
         else {
             $account = __( '', 'FDInstaGetPicWidget_domain' );
-            $type = __( '0', 'FDInstaGetPicWidget_domain' );
+            $type = __( 'simple', 'FDInstaGetPicWidget_domain' );
         }
 
         // Widget admin form
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'account' ); ?>"><?php _e( 'Page name :' ); ?></label> 
-            <input class="widefat" id="<?php echo $this->get_field_id( 'account' ); ?>" name="<?php echo $this->get_field_name( 'account' ); ?>" type="text" value="<?php echo esc_attr( $account ); ?>" />
+            <label for="<?= $this->get_field_id( 'account' ); ?>"><?php _e( 'Page name :' ); ?></label> 
+            <input class="" id="<?= $this->get_field_id( 'account' ); ?>" name="<?= $this->get_field_name( 'account' ); ?>" type="text" value="<?= esc_attr( $account ); ?>" />
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'type' ); ?>"><?php _e( 'Type :' ); ?></label> 
-            <input class="widefat" id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>" type="radio" value="simple" <?= (esc_attr( $type ))? "selected" : NULL; ?> />
-            <input class="widefat" id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>" type="radio" value="extend" <?= (esc_attr( $type ))? "selected" : NULL; ?> />
+            <label for="<?= $this->get_field_id('type'); ?>">
+                <?php _e('Simple '); ?>
+                <input class="" id="<?= $this->get_field_id( 'type' ); ?>" name="<?=$this->get_field_name( 'type' ); ?>" type="radio" value="simple" <?= ( esc_attr( $type ) == 'simple' ? ' checked' : '') ?> />
+            </label>
+            <label for="<?= $this->get_field_id('type'); ?>">
+                <?php _e('Extended '); ?>
+                <input class="" id="<?= $this->get_field_id( 'type' ); ?>" name="<?= $this->get_field_name( 'type' ); ?>" type="radio" value="extend" <?= ( esc_attr( $type ) == 'extend' ? ' checked' : '') ?> />
+            </label>
         </p>
         <?php 
     }
         
     // Updating widget replacing old instances with new
     public function update( $new_instance, $old_instance ) {
+        
         $instance = array();
         $instance['account'] = ( ! empty( $new_instance['account'] ) ) ? strip_tags( $new_instance['account'] ) : '';
         $instance['type'] = ( ! empty( $new_instance['type'] ) ) ? strip_tags( $new_instance['type'] ) : '';
         return $instance;
     }
 } // Class FDFacebookLinkWidget ends
+
+/**
+ *   extend                        
+ *  <li class="sidebar_link sidebar_link_twitter"><a href="https://twitter.com/" class="sidebar_link" target="_blank"><i class="fa fa-twitter sidebar_twitter"></i><p class="sidebar_follow">FOLLOW</p></a></li>
+ *  <li class="sidebar_link sidebar_link_insta"><a href="https://www.instagram.com/" class="sidebar_link" target="_blank"><i class="fa fa-instagram sidebar_insta"></i><p class="sidebar_follow">FOLLOW</p></a></li>
+ *                               
+ * simple
+ *  <li class="sidebar_link sidebar_link_twitter"><a href="https://twitter.com/" class="sidebar_link" target="_blank"><i class="fa fa-twitter sidebar_twitter"></i><p class="sidebar_follow">FOLLOW</p></a></li>
+ *  <li class="sidebar_link sidebar_link_insta"><a href="https://www.instagram.com/" class="sidebar_link" target="_blank"><i class="fa fa-instagram sidebar_insta"></i><p class="sidebar_follow">FOLLOW</p></a></li>
+ */

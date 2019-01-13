@@ -13,15 +13,35 @@
 
 <?php if (is_admin_bar_showing()) {?>
     <div class="header_admin_margin banniere-nav row fixed-top">
-<?php }else{ ?>
+<?php } else { ?>
       <div class="banniere-nav  fixed-top">
 <?php }?>
-            <!--Navbar-->
+        <!-- Navbar start -->
+        <?
+            $categories = get_categories( array(
+                'category__in'      => [4, 5, 6],
+                'tag__not_in'       => [5, 6],
+                'orderby' 		=> 'id',
+                'order'   		=> 'ASC'
+            ) );
+        ?>
         <div class="pos-f-t">
             <div class="collapse" id="navbarToggleExternalContent">
                 <div class="bg-inverse p-4">
                     <h4 class="text">Collapsed content</h4>
-                    <span class="text-muted">Toggleable via the navbar brand.</span>
+                    <?php
+                        foreach( $categories as $category ) {
+                            $param = get_option("taxonomy_".$category->term_id);
+                            if ($param['headhide'] == 0) {
+                                echo '' . sprintf( 
+                                    '<a href="%1$s" alt="%2$s">%3$s</a><br>',
+                                    esc_url( get_category_link( $category->term_id ) ),
+                                    esc_attr( sprintf( __( 'View all posts in %s', 'textdomain' ), $category->name ) ),
+                                    esc_html( $category->name )
+                                );
+                            }
+                        } 
+                    ?>
                 </div>
             </div>
             
@@ -32,7 +52,11 @@
                 <span class=" icon-bar"></span>
               </button>
               <div class="col-md-2">
-                <h2> FooDog</h2>
+                <h2> 
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+				         <?php bloginfo( 'name' ); ?>
+                    </a>
+                </h2>
               </div> 
                 
               
@@ -47,7 +71,7 @@
               
               <div class="col-md-3 logo_nav">
                 <img src="wp-content/themes/foodog/assets/img/dog.png" class=" logoFarmer" alt="logo">
-                <a class="search_single" href=""><span class="button-icon"><i class="fa fa-search"></i></span></a>
+                <a class="search_single" href="#" data-toggle="modal" data-target="#searchModal"><span class="button-icon"><i class="fa fa-search"></i></span></a>
               </div>
             </nav>
           </div>

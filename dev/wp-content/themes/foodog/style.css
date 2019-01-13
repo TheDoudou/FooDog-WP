@@ -45,6 +45,9 @@ a:hover {
 li{
     list-style: none;
 }
+.uppercase{
+    text-transform: uppercase;
+}
 /* admin*/
 .header_admin_margin{
     margin-top: 32px;
@@ -545,6 +548,7 @@ display: flex;
     color:#45484a;
     border: 1px solid #45484a;
 }
+
 /* CONTENT SINGLE PAGE */
 .content_single{
     margin-top: 100px;
@@ -683,7 +687,7 @@ display: flex;
     display: flex;
     justify-content: center;
     padding-bottom: 20px;
-    border-bottom: 1px solid #F2F2F2;
+    
 }
 .btn-newletter{
     background-color: #FF8D6A;
@@ -699,7 +703,71 @@ display: flex;
     background-color: white;
     color: #FF8D6A;
 }
-
+.paragra_single{
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+.title_paragra{
+    font-weight: bold;
+    font-size: 1rem;
+    font-family: "Open sans", serif;
+}
+.text_paragra{
+    color: #aaaaaa;
+    font-family: "Open sans", serif;
+    font-size: 0.9rem;
+}
+.contain_logo{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.logoFarmer_single{
+    object-fit: contain;
+    width: 150px;
+}
+.title_section_single{
+    display: flex;
+    justify-content: flex-start;
+}
+.pagination_single{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #F2F2F2;
+    border-top: 1px solid #F2F2F2;
+}
+.previous{
+    border-right: 1px solid #F2F2F2;;
+}
+.nav_pagi >a{
+    font-family: "Open sans", serif;
+    font-size: 0.8rem;
+    color: rgb(211, 206, 206) !important;
+    font-weight: bold;
+    padding-bottom: 3px;
+    border-bottom: 2px solid white; 
+}
+.nav_pagi >a:hover{
+    border-bottom: 2px solid #FF8D6A;
+}
+.title_pagi{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+.section_article_single{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: #fff;
+    position: relative;
+    top: 20px;
+    right: 20px;;
+    width: 220px;
+    padding-left: 40px;
+}
 /* FOOTER */
 
 footer{

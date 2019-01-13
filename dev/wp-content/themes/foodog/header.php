@@ -30,7 +30,7 @@
 		<a class="social_link" href=""><span class="button-icon"><i class="fa fa-facebook"></i></span></a>
 		<a class="social_link" href=""><span class="button-icon"><i class="fa fa-twitter"></i></span></a>
 		<a class="social_link" href=""><span class="button-icon"><i class="fa fa-instagram"></i></span></a>
-		<a class="social_link" href=""><span class="button-icon"><i class="fa fa-search"></i></span></a>
+		<a class="social_link" href="#" data-toggle="modal" data-target="#searchModal"><span class="button-icon"><i class="fa fa-search"></i></span></a>
 	</div>	
 		<!-- .site-branding -->
 	
