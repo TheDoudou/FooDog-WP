@@ -68,9 +68,9 @@
 	<!-- -->
 
 	<nav  class="navbar navbar-expand-lg navbar-light main-navigation cat_nav container" style="">
-		<button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarToggleContent" aria-controls="navbarToggleContent" aria-expanded="false" aria-label="Toggle navigation">
+		<!--<button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarToggleContent" aria-controls="navbarToggleContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
-		</button>
+		</button>-->
 		<!-- this d-flex break the toggle -->
 		<div id="navbarToggleContent" class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
 			<ul class="navbar-nav">

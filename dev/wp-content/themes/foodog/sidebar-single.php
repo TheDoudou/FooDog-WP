@@ -13,5 +13,7 @@ if ( ! is_active_sidebar( 'sidebar-2' ) ) {
 }
 ?>
 <div id="secondary" class="sidebar  sidebar--main" role="complementary">
+	<h2 class="titre_single_sidebar">FOLLOW US</h2>
 	<?php dynamic_sidebar( 'sidebar-2' ); ?>
+
 </div><!-- #secondary -->

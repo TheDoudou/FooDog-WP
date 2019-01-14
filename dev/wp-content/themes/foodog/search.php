@@ -20,7 +20,11 @@ $i = 0
 
 <!-- .content search -->
 <div class="d-flex justify-content-center">
+
+<form role="search" role="search" method="get" id="searchform" class="searchform" action="">
 	<input class="search-search" id="searchsubmit" type="text" name="s" value="<?= $search_string; ?>">
+</form>
+
 </div>
 
 <div class="container-fluid cat-header">

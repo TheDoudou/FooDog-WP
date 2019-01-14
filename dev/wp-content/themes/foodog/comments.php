@@ -65,6 +65,27 @@ if ( post_password_required() ) {
 		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'silk-lite' ); ?></p>
 	<?php endif; ?>
 
-	<?php comment_form(); ?>
+	<?php
+	$args = array(
+		'title_reply'	=>'LEAVE A RESPONSE',
+		'label_submit'	=> 'LEAVE A COMMENT',
+		'class_submit'	=> 'submit btn btn-coment',
+		'fields'		=> '
+			<div class=" ">
+				<p class="comment-form-comment  ">
+					<textarea name="comment" aria-required="true" class="col-md-12 textArea-comment form-control" id="exampleFormControlTextarea1""  placeholder="Write your comment here ..."></textarea>
+				</p>
+				<div class=" input_comment">
+					<input type="email" class="form-control col-md-4 col-xs-12" id="exampleFormControlInput1" placeholder="Name ...">
+					<input type="email" class="form-control col-md-4 col-xs-12" id="exampleFormControlInput1" placeholder="Email ...">
+					<input type="email" class="form-control col-md-4 col-xs-12" id="exampleFormControlInput1" placeholder="Website ...">
+				</div>
+			</div>
+			',
+		'comment_field'	=> '',
+		'comment_notes_before' 	=> '',
+);
+
+	comment_form( $args ); ?>
 
 </div><!-- #comments -->

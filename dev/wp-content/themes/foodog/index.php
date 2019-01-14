@@ -64,7 +64,7 @@ get_header(); ?>
                     <div class="row container global_article">
                     <?php while ( $query->have_posts() ) {
                         $query->the_post(); ?>
-                        <div class=" col-md-11 article">
+                        <div class=" col-md-11 article article-sm">
                             
                                 <span class="img_artcile"><?php the_post_thumbnail('latest'); ?></span>
                                 <div class="article_right">

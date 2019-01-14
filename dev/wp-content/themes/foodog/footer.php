@@ -59,12 +59,14 @@
             </div>
         </div>
     </div>
-                    
+           
     <div class="footer-bottom">
+    <p class="copyright justify-content-center">&copy; 2018 FooDog.com<p> 
         <div class="icon-footer">
-            <i class="footer-icon1 fa fa-facebook"></i>
-            <i class="footer-icon2 fa fa-twitter"></i>
-            <i class="footer-icon3 fa fa-instagram"></i>
+          
+            <i class="footer-icon_facebook fa fa-facebook"></i>
+            <i class="footer-icon_twitter fa fa-twitter"></i>
+            <i class="footer-icon_instagram fa fa-instagram"></i>
         </div>
     </div>
 </footer>

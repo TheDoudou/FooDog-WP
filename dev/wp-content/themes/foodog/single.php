@@ -8,15 +8,15 @@
 get_header('single'); ?>
 
 
-	<div class="container content_single">
+	<div class="container content_single ">
 
 		<div class="row">
 
-			<div class="col-md-9">
+			<div class="col-md-9 col-sm-auto col-xs-auto global_content_single">
 				<article id="post-<?php  the_ID(); ?>" <?php post_class(); ?>>
 					<div id="primary" class="content-area ">
 
-						<main id="main" class="site-main  site-main--single" role="main">
+						<main id="main" class="site-main site-main--single" role="main">
 
 						<?php while ( have_posts() ) : the_post(); ?>
 
@@ -37,7 +37,7 @@ get_header('single'); ?>
 										<a href="#" class="share_single">SHARE</a>								
 										<a href="#"><i class="facebook_single fa fa-facebook"></i></a>
 										<a href="#"><i class="twitter_single fa fa-twitter"></i></a>
-										<a href="#"><i class="print_single fa fa-pinterest"></i></a>
+										<a href="#"><i class="printerest_single fa fa-pinterest"></i></a>
 									</div>
 								</div>
 							</div>
@@ -48,7 +48,7 @@ get_header('single'); ?>
 								<a href="#" class="comment_single"><i class="fa fa-comment-o"></i>COMMENT</a>
 								<a href="#" class="facebook_single_bottom"><i class=" fa fa-facebook icon_single_bottom"></i> SHARE</a>
 								<a href="#" class="twitter_single_bottom"><i class="fa fa-twitter icon_single_bottom"></i>TWEET</a>
-								<a href="#" class="print_single_bottom"><i class=" fa fa-pinterest icon_single_bottom"></i>PIN IT</a>
+								<a href="#" class="printerest_single_bottom"><i class=" fa fa-pinterest icon_single_bottom"></i>PIN IT</a>
 							</div>	
 							<div class="newletter_global container">
 								<h2 class="title_newletter_single">Subscribe to the FooDog Newletter</h2>
@@ -90,8 +90,8 @@ get_header('single'); ?>
 							</div>
 							<!-- Article du meme theme -->
 
-							<div class="row">
-								<div class="">
+							<div class="row global">
+								<div class="center-sm-single">
 									
 									<?php
 									$cats = get_the_category();
@@ -108,7 +108,7 @@ get_header('single'); ?>
 										<div class="row container global_article">
 										<?php while ( $query->have_posts() ) {
 												$query->the_post();?>
-											<div class="col-12 col-lg-4">
+											<div class="col-xl-4 col-xs-1 global_might ">
 												<div class="img_artcile"><?php the_post_thumbnail('like'); ?></div><br>
 												<div class="">
 													<a href="<?php the_permalink(); ?>" class="link-title"><h3 class="title_article"><?php the_title(); ?></h3></a>
@@ -122,9 +122,14 @@ get_header('single'); ?>
 							<?php
 							// If comments are open or we have at least one comment, load up the comment template
 							if ( comments_open() || get_comments_number() ) :
-								comments_template();
+								comments_template('/comments.php' );
 							endif;
 							?>
+								
+
+							<!-- Form comment post-->
+							
+
 
 						<?php endwhile; // end of the loop. ?>
 						
@@ -134,7 +139,7 @@ get_header('single'); ?>
 				</article>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="col-md-3 siderbar_single">
 				<?php get_sidebar('single'); ?>
 			</div>
 		</div>

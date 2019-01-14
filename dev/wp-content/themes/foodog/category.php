@@ -19,7 +19,7 @@ $i = 0?>
 		<div class="col-md-11 container-fuild">
 			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 			<div class="row OP_article_solo">
-				<div class="col-md-6">
+				<div class="col-md-6 OP_img">
 					<?php the_post_thumbnail('single-post', array('class' => 'img-op attachment-latest size-latest wp-post-image img-fluid')); ?>
 				</div>
 				<div class="col-md-6 OP_text_article">
@@ -51,7 +51,7 @@ $i = 0?>
 			</div>
 		</div>
 	</div>
-	<div class=" col-md-3">
+	<div class=" col-md-3 sidebar_cat">
 		<?php get_sidebar(); ?>
 	</div>
 </div>

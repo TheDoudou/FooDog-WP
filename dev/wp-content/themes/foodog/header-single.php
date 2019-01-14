@@ -50,7 +50,7 @@
                 <span class=" icon-bar"></span>
                 <span class=" icon-bar"></span>
               </button>
-              <div class="col-md-2">
+              <div class="col-md-2 col-sm-2 col-xs-2 titre_nav_single">
                 <h2> 
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 				         <?php bloginfo( 'name' ); ?>
@@ -68,7 +68,7 @@
                   <button type="submit" class="btn btn-dark btn-sign mb-2">SIGN UP</button>
                 </form>
               
-              <div class="col-md-3 logo_nav">
+              <div class="col-md-3 col-sm-3 col-xs-2 logo_nav">
                 <img src="wp-content/themes/foodog/assets/img/dog.png" class=" logoFarmer" alt="logo">
                 <a class="search_single" href="#" data-toggle="modal" data-target="#searchModal"><span class="button-icon"><i class="fa fa-search"></i></span></a>
               </div>

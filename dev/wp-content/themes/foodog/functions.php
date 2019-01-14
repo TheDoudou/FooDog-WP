@@ -290,16 +290,16 @@ class FDInstaGetPicWidget extends WP_Widget {
 
             //print("<pre>".print_r($arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][0],true)."</pre>");
 
-            echo '<a href="https://www.instagram.com/'.$account.'/" target="_blank"><h3 class="h3-title"> INSTAGRAM </h3></a>';
-            echo '<div class="row">';
+            echo '<a href="https://www.instagram.com/'.$account.'/" target="_blank" rel="noreferrer"><h3 class="h3-title"> INSTAGRAM </h3></a>';
+            echo '<div class="row insta_center_footer">';
 
             for ($i = 0; $i < $number; $i++) {
                 $src = $arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][$i]['node']['thumbnail_resources'][1]['src'];
                 $href = $arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][$i]['node']['display_url'];
 
                 echo '<div class="col-xs-4">
-                    <a href="'.$href.'" target="_blank"><img class="img-instagram" src="'.$src.'" alt="Instagram picture"></a>
-                </div>"';
+                    <a href="'.$href.'" target="_blank" rel="noreferrer"><img class="img-instagram" src="'.$src.'" alt="Instagram picture"></a>
+                </div>';
             }
             echo '</div>';
             //echo $args['before_title'] . $url . $args['after_title'];
@@ -345,7 +345,7 @@ class FDInstaGetPicWidget extends WP_Widget {
 /**
  * Creating the facebook link widget
  * 
- * @class FDFacebookLinkWidget()
+ * @class FDSocialNetworkWidget()
  */ 
 class FDSocialNetworkWidget extends WP_Widget {
  
@@ -356,9 +356,9 @@ class FDSocialNetworkWidget extends WP_Widget {
             'FDSocialNetworkWidget', 
             
             // Widget name will appear in UI
-            __('Facebook Link', 'FDSocialNetworkWidget_domain'), 
+            __('Social Network Link', 'FDSocialNetworkWidget_domain'), 
             
-            array( 'description' => __( 'Link facebook page', 'FDSocialNetworkWidget_domain' ), ) 
+            array( 'description' => __( 'Link to social page', 'FDSocialNetworkWidget_domain' ), ) 
         );
     }
     
@@ -367,27 +367,45 @@ class FDSocialNetworkWidget extends WP_Widget {
         $account = apply_filters( 'widget_account', $instance['account'] );
         $type = apply_filters( 'widget_type', $instance['type'] );
         $class = apply_filters( 'widget_type', $instance['class'] );
+        $apiKey = apply_filters( 'widget_type', $instance['api'] );
+        $txt1 = 'LIKE';
+        $txt2 = 'Fans';
+
+        if ($class == 'twitter' || $class == 'instagram') {
+            $txt1 = 'FOLLOW';
+            $txt2 = 'Followers';
+        }
 
         echo $args['before_widget'];
         if ( ! empty( $account ) ) {
 
-            $url_fb = file_get_contents(''.$account);
-            $sidebar = "sidebar_nav";
+            $get_json = file_get_contents(''.$account);
+            $sidebar = "sidebar_nav2";
 
             if ( $type == "extend") {
-                $sidebar = "sidebar_nav2";
-                $arr_fb = explode('window._sharedData = ',$url_insta);
-                $arr_fb = explode(';</script>',$arr_insta[1]);
-                $arr_fb = json_decode($arr_insta[0] , true);
+                $sidebar = "sidebar_nav";
 
-                $view = '<li class="sidebar_link sidebar_link_facebook"><a href="https://facebook.com/" class="sidebar_link" target="_blank"><i class="fa fa-facebook sidebar_facebook"></i><p class="sidebar_follow">LIKE</p></a></li>';
+                if ($class == 'facebook') {
+                    $url = "https://facebook.com/".$account;
+                    $count = getFBCount($account, $apiKey);
+
+                    
+                }
+                else if ($class == 'twitter') {
+                    $url = "https://twitter.com/".$account;
+                    $count = getTwitterCount($account);
+                }
+                else if ($class == 'instagram') {
+                    $url = "http://instagram.com/".$account;
+                }
+
+                $view = '<a href="'.$url.'" class="sidebar_link" target="_blank" rel="noreferrer"><li class="sidebar_link sidebar_link_'.$class.'"><i class="fa fa-'.$class.' sidebar_'.$class.'"></i><p class="sidebar_follow_number">'.$count.' '.$txt2.'</p><p class="sidebar_follow">'.$txt1.'</p></li></a>';
             } else {
-                $view = '<li><a href="https://facebook.com/" class="icon1" target="_blank"><i class="fa fa-facebook"></i></a></li>';
+                $view = '<li><a href="'.$url.'" class="icon_'.$class.'" target="_blank" rel="noreferrer"><i class="fa fa-'.$class.'"></i></a></li>';
             }
 
-            echo '<div class ="sidebar_global">';
-            if ( $sidebar == 'sidebar_nav')
-                echo '<h2 class="titre_single_sidebar">FOLLOW US</h2>';
+
+            echo '<div class="sidebar_global">';
                     
             echo '<ul id="sidebar" class="'.$sidebar.'">';
             echo $args['before_view'] . $view . $args['after_view'];
@@ -404,18 +422,25 @@ class FDSocialNetworkWidget extends WP_Widget {
             $account = $instance[ 'account' ];
             $type = $instance[ 'type' ];
             $class = $instance[ 'class' ];
+            $apiKey = $instance[ 'api' ];
         }
         else {
             $account = __( '', 'FDSocialNetworkWidget_domain' );
             $type = __( 'simple', 'FDSocialNetworkWidget_domain' );
             $class = __( '', 'FDSocialNetworkWidget_domain' );
+            $apiKey = __( '', 'FDSocialNetworkWidget_domain' );
         }
 
         // Widget admin form
         ?>
         <p>
             <label for="<?= $this->get_field_id( 'class' ); ?>"><?php _e( 'Social Network :' ); ?></label> 
-            <input class="" id="<?= $this->get_field_id( 'class' ); ?>" name="<?= $this->get_field_name( 'class' ); ?>" type="text" value="<?= esc_attr( $account ); ?>" />
+            <select id="<?= $this->get_field_id( 'class' ); ?>" name="<?= $this->get_field_name( 'class' ); ?>">
+                <option value="facebook" <?= ($class == 'facebook')?'selected':null;?>>Facebook</option>
+                <option value="twitter" <?= ($class == 'twitter')?'selected':null;?>>Twitter</option>
+                <option value="instagram" <?= ($class == 'instagram')?'selected':null;?>>Instagram</option>
+                <option value="pinterest" <?= ($class == 'pinterest')?'selected':null;?>>Pinterest</option>
+            </select>
         </p>
         <p>
             <label for="<?= $this->get_field_id( 'account' ); ?>"><?php _e( 'Page name :' ); ?></label> 
@@ -431,6 +456,12 @@ class FDSocialNetworkWidget extends WP_Widget {
                 <input class="" id="<?= $this->get_field_id( 'type' ); ?>" name="<?= $this->get_field_name( 'type' ); ?>" type="radio" value="extend" <?= ( esc_attr( $type ) == 'extend' ? ' checked' : '') ?> />
             </label>
         </p>
+        <p>
+            <label class="api_hide" for="<?= $this->get_field_id('api'); ?>">
+                <?php _e('Api Key '); ?>
+                <input class="" id="<?= $this->get_field_id( 'api' ); ?>" name="<?= $this->get_field_name( 'api' ); ?>" type="text" value="<?= esc_attr( $apiKey ); ?>" />
+            </label>
+        </p>
         <?php 
     }
         
@@ -440,18 +471,32 @@ class FDSocialNetworkWidget extends WP_Widget {
         $instance = array();
         $instance['account'] = ( ! empty( $new_instance['account'] ) ) ? strip_tags( $new_instance['account'] ) : '';
         $instance['type'] = ( ! empty( $new_instance['type'] ) ) ? strip_tags( $new_instance['type'] ) : '';
+        $instance['class'] = ( ! empty( $new_instance['class'] ) ) ? strip_tags( $new_instance['class'] ) : '';
         return $instance;
     }
 } // Class FDFacebookLinkWidget ends
 
-/**
- *   extend                        
- *  <li class="sidebar_link sidebar_link_twitter"><a href="https://twitter.com/" class="sidebar_link" target="_blank"><i class="fa fa-twitter sidebar_twitter"></i><p class="sidebar_follow">FOLLOW</p></a></li>
- *  <li class="sidebar_link sidebar_link_insta"><a href="https://www.instagram.com/" class="sidebar_link" target="_blank"><i class="fa fa-instagram sidebar_insta"></i><p class="sidebar_follow">FOLLOW</p></a></li>
- *                               
- * simple
- *  <li class="sidebar_link sidebar_link_twitter"><a href="https://twitter.com/" class="sidebar_link" target="_blank"><i class="fa fa-twitter sidebar_twitter"></i><p class="sidebar_follow">FOLLOW</p></a></li>
- *  <li class="sidebar_link sidebar_link_insta"><a href="https://www.instagram.com/" class="sidebar_link" target="_blank"><i class="fa fa-instagram sidebar_insta"></i><p class="sidebar_follow">FOLLOW</p></a></li>
- */
+
+function getFBCount($acc, $api) {
 
 
+    return '65000';
+}
+
+function getTwitterCount($acc) {
+    // get page
+    $ch = file_get_contents('https://twitter.com/'. $acc .'?lang=fr');
+
+    $doc = new DOMDocument();
+    $doc->loadHTML($ch);
+    
+    $finder = new DomXPath($doc);
+    
+    $classname="ProfileNav-stat";
+    $nodes = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' $classname ')]");
+    
+    // translate followers in each lang to replace it
+    preg_match_all('!\d+!', $nodes[2]->textContent, $matches);
+
+    return $matches[0][0];
+}
