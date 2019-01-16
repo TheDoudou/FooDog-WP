@@ -16,7 +16,7 @@ $i = 0?>
 
 <div class=" OP_article_global container">
 	<div class="row ">
-		<div class="col-md-11 container-fuild">
+		<div class="col-md-9 container-fuild">
 			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 			<div class="row OP_article_solo">
 				<div class="col-md-6 OP_img">
@@ -30,6 +30,7 @@ $i = 0?>
 				</div>
 			</div>
 			<?php $i++; endwhile; endif; ?>
+			<?php dynamic_sidebar( 'sidebar-4' ); ?>
 			<div class="pagination_global">
 			<?php 
 			//var_dump(ceil(get_category(get_cat_ID(single_term_title("", false)))->category_count/$i));
@@ -50,9 +51,9 @@ $i = 0?>
 				) ); ?>
 			</div>
 		</div>
-	</div>
-	<div class=" col-md-3 sidebar_cat">
-		<?php get_sidebar(); ?>
+		<div class=" col-md-3 sidebar_cat">
+			<?php get_sidebar(); ?>
+		</div>
 	</div>
 </div>
 <?php get_footer(); ?>

@@ -27,11 +27,11 @@ get_header('single'); ?>
 							<?php the_post_thumbnail('', array('class' => 'img-single attachment-latest size-latest headerbig wp-post-image img-fluid')); ?>
 							<!-- barre de spéaration -->
 							<div class="under_img_single container">
-								<div class="left_under_img col-md-4">
+								<div class="left_under_img col-md-4 col-sm-3 col-xs-3">
 									<img src="wp-content/themes/foodog/assets/img/dog.png" class=" logoFarmer_small" alt="logo">
 									<p class="text_under_img">The Farmer's dog</p>
 								</div>
-								<div class="right_under_img col-md-6">
+								<div class="right_under_img col-md-8 col-sm-9 col-xs-9">
 									<div>
 										<a href="#" class="comment_single"><i class="fa fa-comment-o"></i>COMMENT</a>
 										<a href="#" class="share_single">SHARE</a>								
@@ -134,12 +134,12 @@ get_header('single'); ?>
 						<?php endwhile; // end of the loop. ?>
 						
 						</main><!-- #main -->
-
+						
 					</div><!-- #primary -->
 				</article>
 			</div>
-			
-			<div class="col-md-3 siderbar_single">
+			<?php dynamic_sidebar( 'sidebar-4 ' ); ?>
+			<div class="col-md-3 siderbar_single ">
 				<?php get_sidebar('single'); ?>
 			</div>
 		</div>

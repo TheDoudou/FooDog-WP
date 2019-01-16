@@ -71,7 +71,13 @@ get_header(); ?>
                                 <h4 class="cat_article"><?php foreach ( get_the_category() as $category) { echo strtoupper($category->name).chr(127); } ?></h4>
                                 <a href="<?php the_permalink(); ?>" class="link-title"><h3 class="title_article"><?php the_title(); ?></h3></a>
                                 <p><?php echo wp_trim_words( get_the_content(), 35, ' ...'); ?></p>
-                                <a href="#" class="share_global"><i class="fa fa-share" ></i><p class="share">share</p></a>
+                                <div class="global_anime">
+                                    <a href="" class="share_global"><i class="fa fa-share" ></i><p class="share">share</p></a>
+                                    <div class="social_anime ">
+                                        <a href="#"><i class="facebook_single fa fa-facebook"></i></a>
+                                        <a href="#"><i class="twitter_single fa fa-twitter"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     <?php }; ?>
@@ -106,6 +112,8 @@ get_header(); ?>
                     </div>
                 <?php }; ?>
                 
+                <?php dynamic_sidebar( 'sidebar-4' ); ?>
+
                 <div class="pagination_global">
                 <?php   echo paginate_links( array(
                             'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),

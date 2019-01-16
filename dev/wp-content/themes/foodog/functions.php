@@ -204,6 +204,7 @@ function foodog_post_update_count( $pid ) {
 add_action( 'widgets_init', 'theme_foodog_sidebar_widgets_init' );
 add_action( 'widgets_init', 'theme_foodog_sidebar_single_widgets_init' );
 add_action( 'widgets_init', 'theme_foodog_last_insta_post_init' );
+add_action( 'widgets_init', 'theme_foodog_responsive_init' );
 
 
 function theme_foodog_sidebar_widgets_init() {
@@ -212,9 +213,9 @@ function theme_foodog_sidebar_widgets_init() {
         'id' => 'sidebar-1',
         'description' => __( 'Widgets in this area will be shown on all posts and pages.', 'theme-foodog' ),
         'before_widget' => '<ul><li id="%1$s" class="widget %2$s">',
-	'after_widget'  => '</li></ul>',
-	'before_title'  => '<h2 class="widgettitle">',
-	'after_title'   => '</h2>',
+        'after_widget'  => '</li></ul>',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>',
     ) );
 }
 
@@ -223,10 +224,10 @@ function theme_foodog_sidebar_single_widgets_init() {
         'name' => __( 'Single Sidebar', 'theme-foodog' ),
         'id' => 'sidebar-2',
         'description' => __( 'Widgets in this area will be shown on single page.', 'theme-foodog' ),
-        'before_widget' => '<ul><li id="%1$s" class="widget %2$s">',
-	'after_widget'  => '</li></ul>',
-	'before_title'  => '<h2 class="widgettitle">',
-	'after_title'   => '</h2>',
+        'before_widget' => '',
+        'after_widget'  => '',
+        'before_title'  => '<h2 class="widgettitle">',
+        'after_title'   => '</h2>',
     ) );
 }
 
@@ -236,9 +237,21 @@ function theme_foodog_last_insta_post_init() {
         'id' => 'sidebar-3',
         'description' => __( 'Widgets in this area will be shown on footer.', 'theme-foodog' ),
         'before_widget' => '',
-	'after_widget'  => '',
-	'before_title'  => '',
-	'after_title'   => '',
+        'after_widget'  => '',
+        'before_title'  => '',
+        'after_title'   => '',
+    ) );
+}
+
+function theme_foodog_responsive_init() {
+    register_sidebar( array(
+        'name' => __( 'Responsive', 'theme-foodog' ),
+        'id' => 'sidebar-4',
+        'description' => __( 'View element with responsive display.', 'theme-foodog' ),
+        'before_widget' => '<div class="responsive_view align-self-center">',
+        'after_widget'  => '</div>',
+        'before_title'  => '',
+        'after_title'   => '',
     ) );
 }
 
@@ -249,6 +262,7 @@ function theme_foodog_last_insta_post_init() {
 function wpb_load_widget() {
     register_widget( 'FDInstaGetPicWidget' );
     register_widget( 'FDSocialNetworkWidget' );
+    register_widget( 'FDDivInOut' );
 }
 
 add_action( 'widgets_init', 'wpb_load_widget' );
@@ -397,17 +411,20 @@ class FDSocialNetworkWidget extends WP_Widget {
                 }
                 else if ($class == 'instagram') {
                     $url = "http://instagram.com/".$account;
+                    $count = getInstaCount($account);
                 }
 
-                $view = '<a href="'.$url.'" class="sidebar_link" target="_blank" rel="noreferrer"><li class="sidebar_link sidebar_link_'.$class.'"><i class="fa fa-'.$class.' sidebar_'.$class.'"></i><p class="sidebar_follow_number">'.$count.' '.$txt2.'</p><p class="sidebar_follow">'.$txt1.'</p></li></a>';
+                $view = '<a href="'.$url.'" class="sidebar_link" target="_blank" rel="noreferrer"><li class="sidebar_link sidebar_link_'.$class.'"><i class="fa fa-'.$class.' sidebar_'.$class.' p-2"></i><p class="sidebar_follow_number p-1">'.$count.' '.$txt2.'</p><p class="sidebar_follow ml-auto p-2">'.$txt1.'</p></li></a>';
             } else {
-                $view = '<li><a href="'.$url.'" class="icon_'.$class.'" target="_blank" rel="noreferrer"><i class="fa fa-'.$class.'"></i></a></li>';
+                $view = '<a href="'.$url.'" class="icon_'.$class.'" target="_blank" rel="noreferrer"><i class="fa fa-'.$class.'"></i></a>';
             }
 
-
-            echo '<div class="sidebar_global">';
+            if ($type == 'extend')
+                echo '<div class="sidebar_global">';
+            else
+                echo '<div class="sidebar_single">';
                     
-            echo '<ul id="sidebar" class="'.$sidebar.'">';
+            echo '<ul class="'.$sidebar.'">';
             echo $args['before_view'] . $view . $args['after_view'];
             echo '</ul>
                 </div>';
@@ -476,11 +493,78 @@ class FDSocialNetworkWidget extends WP_Widget {
     }
 } // Class FDFacebookLinkWidget ends
 
+class FDDivInOut extends WP_Widget {
+    function __construct() {
+        parent::__construct(
+        
+            // Base ID of your widget
+            'FDDivInOut', 
+            
+            // Widget name will appear in UI
+            __('Div Open Close', 'FDDivInOut_domain'), 
+            
+            array( 'description' => __( 'Add Open and close div', 'FDDivInOut_domain' ), ) 
+        );
+    }
+
+    // Front-end
+    public function widget( $args, $instance ) {
+        $class = apply_filters( 'widget_account', $instance['class'] );
+        $type = apply_filters( 'widget_type', $instance['type'] );
+
+        if ($type == 'open')
+            echo '<div class="'.$class.'">';
+        if ($type == 'close')
+            echo '</div>';
+    }
+
+    // Back-end 
+    public function form( $instance ) {
+        if ( isset( $instance[ 'type' ] ) ) {
+            $type = $instance[ 'type' ];
+            $class = $instance[ 'class' ];
+        }
+        else {
+            $type = __( 'open', 'FDSocialNetworkWidget_domain' );
+            $class = __( '', 'FDSocialNetworkWidget_domain' );
+        }
+
+        // Widget admin form
+        ?>
+        <p>
+            <label for="<?= $this->get_field_id('type'); ?>">
+                <?php _e('Open '); ?>
+                <input class="" id="<?= $this->get_field_id( 'type' ); ?>" name="<?= $this->get_field_name( 'type' ); ?>" type="radio" value="open" <?= ( esc_attr( $type ) == 'open' ? ' checked' : '') ?> />
+            </label>
+            <label for="<?= $this->get_field_id('type'); ?>">
+                <?php _e('Close '); ?>
+                <input class="" id="<?= $this->get_field_id( 'type' ); ?>" name="<?= $this->get_field_name( 'type' ); ?>" type="radio" value="close" <?= ( esc_attr( $type ) == 'close' ? ' checked' : '') ?> />
+            </label>
+        </p>
+        <p>
+            <label class="api_hide" for="<?= $this->get_field_id('class'); ?>">
+                <?php _e('Api Key '); ?>
+                <input class="" id="<?= $this->get_field_id( 'class' ); ?>" name="<?= $this->get_field_name( 'class' ); ?>" type="text" value="<?= esc_attr( $class ); ?>" />
+            </label>
+        </p>
+        <?php 
+    }
+        
+    // Updating widget replacing old instances with new
+    public function update( $new_instance, $old_instance ) {
+        
+        $instance = array();
+        $instance['type'] = ( ! empty( $new_instance['type'] ) ) ? strip_tags( $new_instance['type'] ) : '';
+        $instance['class'] = ( ! empty( $new_instance['class'] ) ) ? strip_tags( $new_instance['class'] ) : '';
+        return $instance;
+    }
+}
+
 
 function getFBCount($acc, $api) {
 
 
-    return '65000';
+    return '65432';
 }
 
 function getTwitterCount($acc) {
@@ -499,4 +583,18 @@ function getTwitterCount($acc) {
     preg_match_all('!\d+!', $nodes[2]->textContent, $matches);
 
     return $matches[0][0];
+}
+
+function getInstaCount($acc) {
+    $url_get = file_get_contents('https://www.instagram.com/'.$acc);
+
+    $arr_insta = explode('window._sharedData = ',$url_get);
+    
+    $arr_insta = explode(';</script>',$arr_insta[1]);
+    
+    $arr_insta = json_decode($arr_insta[0] , true);
+    //print("<pre>".print_r($arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_followed_by']['count'],true)."</pre>"); //['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'][0]
+
+    return $arr_insta['entry_data']['ProfilePage'][0]['graphql']['user']['edge_followed_by']['count'];
+
 }

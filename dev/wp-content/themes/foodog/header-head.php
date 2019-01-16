@@ -6,7 +6,7 @@
  * @package FooDog
  */
 
-header('Cache-Control: max-age=31536000');
+//header('Cache-Control: max-age=200');
 ?>
 
 <!DOCTYPE html>
@@ -25,15 +25,14 @@ header('Cache-Control: max-age=31536000');
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,700|Open+Sans:400,800" rel="stylesheet">	
 	<link rel="icon" href="wp-content/themes/foodog/assets/img/favicon.png" type="images/x-icon">
 	<link rel="manifest" href="wp-content/themes/foodog/manifest.json">
-	<!--<script src="wp-content/themes/foodog/assets/js/upup.min.js"></script>
+	<script src="wp-content/themes/foodog/assets/js/upup.min.js"></script>
 	<script>
 		UpUp.start({
-			'content-url': 'offline.html'
+			'content-url': 'wp-content/themes/foodog/offline.html'
     	});
-	</script>-->
+	</script>
 	<title>FooDogDev</title>
 	<?php wp_head(); ?>
 </head>
@@ -42,11 +41,8 @@ header('Cache-Control: max-age=31536000');
   <div class="modal-dialog modal-full" role="document">
     <div class="modal-content d-flex justify-content-center align-items-center">
       <div class="modal-body">
-				
-       
-					
-					<form role="search" role="search" method="get" id="searchform" class="searchform" action="">
-					
+
+					<form  role="search" method="get" id="searchform" class="searchform" action="?s">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">X</button>
 						<input class="modal-search" id="searchsubmit" type="text" name="s" placeholder="Search ...">
 					</form>

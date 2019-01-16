@@ -19,23 +19,20 @@ $i = 0
 
 
 <!-- .content search -->
-<div class="d-flex justify-content-center">
-
-<form role="search" role="search" method="get" id="searchform" class="searchform" action="">
-	<input class="search-search" id="searchsubmit" type="text" name="s" value="<?= $search_string; ?>">
-</form>
-
-</div>
+<!--<div class="d-flex justify-content-center">
+	<form role="search" role="search" method="get" id="searchform" class="searchform" action="">
+		<input class="search-search" id="searchsubmit" type="text" name="s" value="<?php //$search_string; ?>">
+	</form>
+</div>-->
 
 <div class="container-fluid cat-header">
 	<h2 class="OP_cat_page">Search : <?= $search_string.' ('.$wp_query->found_posts.')'; ?></h2>
 </div>
 
-
 <div class=" OP_article_global container">
 	<div class="row ">
-		<div class="col-md-11 container-fuild">
-			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+		<div class="col-md-9 container-fuild">
+			<?php if ( have_posts() ) { while ( have_posts() ) : the_post(); ?>
 			<div class="row OP_article_solo">
 				<div class="col-md-6">
 					<?php the_post_thumbnail('single-post', array('class' => 'img-op attachment-latest size-latest wp-post-image img-fluid')); ?>
@@ -47,7 +44,13 @@ $i = 0
 					<a href="#" class="share_global"><i class="fa fa-share" ></i><p class="share">share</p></a>
 				</div>
 			</div>
-			<?php $i++; endwhile; endif; ?>
+			<?php $i++; endwhile;
+					} else if ($wp_query->found_posts == 0) { ?>
+						<div class="row">
+							<div class="col-md-12"><p>Not Found.</p></div>
+						</div>
+					<?php } ?>
+			<?php dynamic_sidebar( 'sidebar-4' ); ?>
 			<div class="pagination_global">
 			<?php 
 			//var_dump(ceil(get_category(get_cat_ID(single_term_title("", false)))->category_count/$i));
@@ -68,9 +71,9 @@ $i = 0
 				) ); ?>
 			</div>
 		</div>
-	</div>
-	<div class=" col-md-3">
-		<?php get_sidebar(); ?>
+		<div class=" col-md-3">
+			<?php get_sidebar(); ?>
+		</div>
 	</div>
 </div>
 <?php get_footer(); ?>

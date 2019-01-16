@@ -67,12 +67,15 @@
                   </div>
                   <button type="submit" class="btn btn-dark btn-sign mb-2">SIGN UP</button>
                 </form>
-              
+                
+
+                    
               <div class="col-md-3 col-sm-3 col-xs-2 logo_nav">
                 <img src="wp-content/themes/foodog/assets/img/dog.png" class=" logoFarmer" alt="logo">
                 <a class="search_single" href="#" data-toggle="modal" data-target="#searchModal"><span class="button-icon"><i class="fa fa-search"></i></span></a>
               </div>
             </nav>
+            
           </div>
         </div>
       </div>
