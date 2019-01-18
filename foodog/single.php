@@ -33,28 +33,28 @@ get_header('single'); ?>
 								</div>
 								<div class="right_under_img col-md-8 col-sm-9 col-xs-9">
 									<div>
-										<a href="#" class="comment_single"><i class="fa fa-comment-o"></i>COMMENT</a>
-										<a href="#" class="share_single">SHARE</a>								
-										<a href="#"><i class="facebook_single fa fa-facebook"></i></a>
-										<a href="#"><i class="twitter_single fa fa-twitter"></i></a>
-										<a href="#"><i class="printerest_single fa fa-pinterest"></i></a>
+										<a href="#comments" class="comment_single" aria-hidden="true"><i class="fa fa-comment-o"></i>(<?= comments_number( '0', '1', '%' ); ?>) COMMENT</a>
+										<a href="#" class="share_single" aria-hidden="true">SHARE</a>								
+										<a href="#" aria-hidden="true"><i class="facebook_single fa fa-facebook"></i></a>
+										<a href="#" aria-hidden="true"><i class="twitter_single fa fa-twitter"></i></a>
+										<a href="#" aria-hidden="true"><i class="printerest_single fa fa-pinterest"></i></a>
 									</div>
 								</div>
 							</div>
 							<!-- barre social start -->
 							<div class="text_single"><?php echo $post->post_content; ?></div>
 							<div class="container global_share_single">
-								<a href="#" class="share_single">SHARE</a>
-								<a href="#" class="comment_single"><i class="fa fa-comment-o"></i>COMMENT</a>
-								<a href="#" class="facebook_single_bottom"><i class=" fa fa-facebook icon_single_bottom"></i> SHARE</a>
-								<a href="#" class="twitter_single_bottom"><i class="fa fa-twitter icon_single_bottom"></i>TWEET</a>
-								<a href="#" class="printerest_single_bottom"><i class=" fa fa-pinterest icon_single_bottom"></i>PIN IT</a>
+								<a href="#" class="share_single" aria-hidden="true">SHARE</a>
+								<a href="#comments" class="comment_single" aria-hidden="true"><i class="fa fa-comment-o"></i>(<?= comments_number( '0', '1', '%' ); ?>) COMMENT</a>
+								<a href="#" class="facebook_single_bottom" aria-hidden="true"><i class=" fa fa-facebook icon_single_bottom"></i> SHARE</a>
+								<a href="#" class="twitter_single_bottom" aria-hidden="true"><i class="fa fa-twitter icon_single_bottom"></i>TWEET</a>
+								<a href="#" class="printerest_single_bottom" aria-hidden="true"><i class=" fa fa-pinterest icon_single_bottom"></i>PIN IT</a>
 							</div>	
 							<div class="newletter_global container">
 								<h2 class="title_newletter_single">Subscribe to the FooDog Newletter</h2>
 								<p>Get health and wellness tips about your dog delivered to your inbox. </p>
 								<div class="col-md-7 input_single inpunt-group-lg">
-									<input type="text" value="" class="col-md-8" name="email" placeholder="Your email"/>
+									<input type="text" value="" class="col-md-8" name="email" id="mail2" placeholder="Your email"/>
 									<button type="submit" class="btn btn-newletter">SIGN UP</button>
 								</div>
 							</div>	

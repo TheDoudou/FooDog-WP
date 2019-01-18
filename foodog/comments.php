@@ -73,12 +73,13 @@ if ( post_password_required() ) {
 		'fields'		=> '
 			<div class=" ">
 				<p class="comment-form-comment  ">
-					<textarea name="comment" aria-required="true" class="col-md-12 textArea-comment form-control" id="exampleFormControlTextarea1""  placeholder="Write your comment here ..."></textarea>
+				<label for="comment1"> </label>
+					<textarea name="comment" aria-required="true" class="col-md-12 textArea-comment form-control" id="comment1"  placeholder="Write your comment here ..."></textarea>
 				</p>
 				<div class=" input_comment">
-					<input type="email" class="form-control col-md-4 col-xs-12" id="exampleFormControlInput1" placeholder="Name ...">
-					<input type="email" class="form-control col-md-4 col-xs-12" id="exampleFormControlInput1" placeholder="Email ...">
-					<input type="email" class="form-control col-md-4 col-xs-12" id="exampleFormControlInput1" placeholder="Website ...">
+					<input type="text" class="form-control col-md-4 col-xs-12" id="name1" placeholder="Name ...">
+					<input type="email" class="form-control col-md-4 col-xs-12" id="mail3" placeholder="Email ...">
+					<input type="text" class="form-control col-md-4 col-xs-12" id="site1" placeholder="Website ...">
 				</div>
 			</div>
 			',

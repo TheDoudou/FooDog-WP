@@ -6,7 +6,7 @@
  * @package FooDog
  */
 
-//header('Cache-Control: max-age=200');
+header('Cache-Control: max-age=3600');
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@
 			'content-url': 'wp-content/themes/foodog/offline.html'
     	});
 	</script>
-	<title>FooDogDev</title>
+	<title>FooDog</title>
 	<?php wp_head(); ?>
 </head>
 

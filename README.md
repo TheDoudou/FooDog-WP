@@ -2,7 +2,13 @@
 
 For foodog (or other wp site ;) )
 
+By :
+- [Edouard Entremont](https://github.com/TheDoudou/)
+- [Jonathan Fauchoux](https://github.com/JonathanFauchoux)
+[comment]:- [Elhaddadi Meroine](https://github.com/elhaddadi-meroine96)
+
 Fonctionality :
+
     Global :
         Header :
             - Widget social link

@@ -63,7 +63,7 @@
                   <div class="form-group mb-2">
                     <p class="text-form">FooDog In Your Inbox</p>
                     <label for="staticEmail2" class="sr-only">Email</label>
-                    <input type="email" class="form-control input-newletter" id="email" placeholder="Your email">
+                    <input type="email" class="form-control input-newletter" id="staticEmail2" placeholder="Your email">
                   </div>
                   <button type="submit" class="btn btn-dark btn-sign mb-2">SIGN UP</button>
                 </form>
@@ -72,7 +72,7 @@
                     
               <div class="col-md-3 col-sm-3 col-xs-2 logo_nav">
                 <img src="wp-content/themes/foodog/assets/img/dog.png" class=" logoFarmer" alt="logo">
-                <a class="search_single" href="#" data-toggle="modal" data-target="#searchModal"><span class="button-icon"><i class="fa fa-search"></i></span></a>
+                <a class="search_single" href="#" data-toggle="modal" data-target="#searchModal" aria-hidden="true"><span class="button-icon"><i class="fa fa-search"></i></span></a>
               </div>
             </nav>
             
