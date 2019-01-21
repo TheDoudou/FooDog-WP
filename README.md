@@ -1,15 +1,24 @@
 # Theme word press
 
-For foodog (or other wp site ;) )
+## Make a WordPress template for FooDog.
+
+#### Sample site : [FooDog](https://foodog.thedoudou.myds.me)
+
+#### Repositories Github : [Github](https://github.com/TheDoudou/FooDog-WP)
+
+#### Exercise title : [FooDog - BeCode (projects)](https://github.com/becodeorg/CRL-Turing-2.6/tree/master/Projects/Foodog)
 
 By :
 - [Edouard Entremont](https://github.com/TheDoudou/)
 - [Jonathan Fauchoux](https://github.com/JonathanFauchoux)
-[comment]:- [Elhaddadi Meroine](https://github.com/elhaddadi-meroine96)
 
+Audit test :
+![test audit](https://i.imgur.com/rw5V6vN.png)
 
+Screen Shot :
+![Screenshot](https://i.imgur.com/dSyogeF.png)
 
-Fonctionality :
+####  Fonctionality :
 
     Global :
         Header :
@@ -29,7 +38,7 @@ Fonctionality :
         - Order category
         - Forced hamburger menu at single page
 
-    Side bar right:
+    Sidebar on right:
         - Two side bar, global and single
         - Fixed top with scrool
         - Zone for widget (global and single)
@@ -47,13 +56,14 @@ Fonctionality :
     Category page :
         - View 8 lastest post
         - Pagination
+        - sidebar
     
     Post page (single page) :
-        - 
+        - "You might also like" select 3 Post in same cat
 
     Footer
         - Category (view or not and order)
-        - Popular post (count post)
+        - Popular post (by count read post)
         - Zone for widget
 
     Widget :
